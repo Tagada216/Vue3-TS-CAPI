@@ -1,6 +1,4 @@
 import { screen, render } from "@testing-library/vue";
-import "@testing-library/jest-dom";
-import { shallowMount } from "@vue/test-utils";
 import HelloWorld from "@/components/HelloWorld.vue";
 import "@testing-library/jest-dom";
 describe("HelloWorld.vue", () => {
@@ -8,7 +6,7 @@ describe("HelloWorld.vue", () => {
     const msg = "new message";
 
     render(HelloWorld, { props: { msg } });
-    expect(screen.getByText(msg)).toEqual(msg);
+    expect(screen.getByText(msg)).toBeInTheDocument();
     expect(screen.getByText("Installed CLI Plugins")).toBeInTheDocument();
   });
 });

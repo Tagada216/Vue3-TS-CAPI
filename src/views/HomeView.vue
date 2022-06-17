@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <h1>Fabulous Quizz</h1>
+    <button @click="loadUser">Load users</button>
+    <div v-for="user in users" :key="user.id">
+      <h3>{{ user.name }}</h3>
+    </div>
+
+    <button class="btn" @click="newGame">Start game !</button>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+<script lang="ts" setup>
+import { ref } from "vue";
+import router from "@/router/index";
+import { getUsers } from "@/services/api/placeholder";
 
-export default defineComponent({
-  name: "HomeView",
-  components: {
-    HelloWorld,
-  },
-});
+let users = ref();
+
+async function loadUser() {
+  users.value = await getUsers();
+}
+function newGame() {
+  router.push({ name: "game" });
+}
 </script>
